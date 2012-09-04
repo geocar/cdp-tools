@@ -1,0 +1,16 @@
+cdp-tools is a set of tools for working with the Cisco Discovery Protocol.
+
+they were written because of a particular hosting center that insisted on
+learning routes using CDP, and thusly required Cisco Switches for doing their
+dirty work.
+
+cdp-listen/cdp-routemgr are proof-of-concepts that may be useful if you want
+to implement a similarly brain-damaged proposal.
+
+cdp-send is a must-have tool if you are in that situation. It can pretend to
+be just about any kind of Cisco hardware you can imagine.
+
+
+the source is a bit difficult to follow as a requirement was that it build
+under both the ancient libnet and the new libnet code. hence, much nasty
+macro-ing.

@@ -1,0 +1,67 @@
+2007-03-02 23:28  geocar
+
+	* cdp-send.c: incorporate vlan patches
+
+2006-10-26 18:05  geocar
+
+	* cdp-listen.c, cdp-routemgr, cdp-send.c: adding texts
+
+2006-10-26 17:57  geocar
+
+	* BSDmakefile, cdp-listen.c, cdp-send.c: Patches from rune.saetre
+	  at netcom-gsm.no
+
+2005-01-31 07:23  geocar
+
+	* DESCRIPTION, README: More docs...
+
+2004-04-23 15:49  geocar
+
+	* cdp-routemgr: increase timeout
+
+2004-04-22 18:34  geocar
+
+	* cdp-routemgr: moved flushing/etc
+
+2004-04-22 18:32  geocar
+
+	* cdp-routemgr: adding cdp-routemgr (good for testing)
+
+2004-04-22 18:23  geocar
+
+	* cdp-listen.c: flush output after writing record...
+
+2004-04-22 17:36  geocar
+
+	* cdp-listen.c: better cdp-listen output still; removing debug
+	  info.
+
+2004-04-22 17:22  geocar
+
+	* cdp-listen.c, cdp-send.c: fix debug output, fix byte order on
+	  adress on libnet 1.0 (may have borked 1.1) made route lines from
+	  cdp-listen actually runable :)
+
+2004-04-22 16:35  geocar
+
+	* cdp-listen.c: make the output a lot more interesting
+
+2004-04-22 14:26  geocar
+
+	* cdp-listen.c, cdp-send.c: fix to address byte order, support for
+	  overriding portid, interface name, hostname, version, and address
+	  list.
+
+	  ability to send ip_prefix list (so mike's otp will work), vtp
+	  management domain, VLAN ID, and port duplex.
+
+	  fix to ip-prefix parser in cdp-listen (for testing)
+
+2004-04-21 23:58  geocar
+
+	* Makefile, cdp-listen.c, cdp-send.c: Initial revision
+
+2004-04-21 23:58  geocar
+
+	* Makefile, cdp-listen.c, cdp-send.c: Loaded into CVS
+
