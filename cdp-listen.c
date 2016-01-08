@@ -53,7 +53,8 @@ typedef struct _cfp_packet_data
 static int
 usage()
 { 
-	fprintf(stderr, "Usage: cdp-listen interfaces... | logsomething\n");
+	fprintf(stderr, "Usage: cdp-listen [-o] interfaces... | logsomething\n");
+	fprintf(stderr, "       -o   Onsehot (only with one single interface)\n");
 	return 0;
 };
 
@@ -252,13 +253,17 @@ doit(char *interface, struct pcap_pkthdr *pcap_h, register u_char *pcap_p)
 int main(int argc, char *argv[])
 {
 	int c, i, j, m;
+	int loopcount = -1;
 	char errbuf[PCAP_ERRBUF_SIZE];
 	struct bpf_program filter;
 	char *filter_app = "ether multicast and ether[20:2] = 0x2000";
 	pcap_t **h;
 
-	while((c=getopt(argc,argv,""))!=EOF) {
+	while((c=getopt(argc,argv,"o"))!=EOF) {
 		switch (c) {
+		case 'o':
+			loopcount=1;
+			break;
 		default:
 			usage();
 			exit(1);
@@ -315,7 +320,7 @@ int main(int argc, char *argv[])
 			}
 		}
 	} else {
-		if (pcap_loop(h[0], -1, (pcap_handler) doit, argv[optind]) < 0) {
+		if (pcap_loop(h[0], loopcount, (pcap_handler) doit, argv[optind]) < 0) {
 			pcap_perror(h[0], NULL);
 			exit(1);
 		}
