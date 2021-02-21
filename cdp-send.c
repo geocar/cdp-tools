@@ -70,7 +70,6 @@ static int cdp_capset;
 #define CDP_CAP_C        0x200   /* CVTA/STP Dispute Resolution/Cisco VT Camera */
 #define CDP_CAP_M        0x400   /* Two Port Mac Relay */
 
-
 struct cdp_header { 
 /* ethernet 802.3 header */
 	unsigned char dst_addr[6] __attribute__ ((packed));
