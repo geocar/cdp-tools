@@ -58,11 +58,11 @@ static unsigned int use_ip_prefix_len = 0;
 
 /* the capability masks */
 static int cdp_capset;
-#define CDP_CAP_RT	 0x01    /* Router */
-#define CDP_CAP_T	 0x02    /* Transparent Bridge */
+#define CDP_CAP_RT       0x01    /* Router */
+#define CDP_CAP_T        0x02    /* Transparent Bridge */
 #define CDP_CAP_B        0x04    /* Source Route Bridge */
 #define CDP_CAP_S        0x08    /* Switch */
-#define CDP_CAP_H	 0x10    /* Host */
+#define CDP_CAP_H        0x10    /* Host */
 #define CDP_CAP_I        0x20    /* IGMP capable */
 #define CDP_CAP_R        0x40    /* Repeater */
 #define CDP_CAP_P        0x80    /* VoIP Phone */
