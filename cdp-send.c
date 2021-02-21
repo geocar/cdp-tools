@@ -644,7 +644,7 @@ main(int argc, char* argv[])
 		};
 	};
 
-	if (!didcap) cdp_capset = CDP_CAP_L3TXRX;
+	if (!didcap) cdp_capset = CDP_CAP_H;
 
 	if (optind == argc) {
 		usage();
