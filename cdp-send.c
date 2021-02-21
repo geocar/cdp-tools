@@ -58,13 +58,18 @@ static unsigned int use_ip_prefix_len = 0;
 
 /* the capability masks */
 static int cdp_capset;
-#define CDP_CAP_L3R      0x01    /* a layer 3 router */
-#define CDP_CAP_L2TB     0x02    /* a layer 2 transparent bridge */
-#define CDP_CAP_L2SRB    0x04    /* a layer 2 source-route bridge */
-#define CDP_CAP_L2SW     0x08    /* a layer 2 switch (non-spanning tree) */
-#define CDP_CAP_L3TXRX   0x10    /* a layer 3 (non routing) host */
-#define CDP_CAP_IGRP     0x20    /* does not forward IGMP Packets to non-routers */
-#define CDP_CAP_L1       0x40    /* a layer 1 repeater */
+#define CDP_CAP_RT	 0x01    /* Router */
+#define CDP_CAP_T	 0x02    /* Transparent Bridge */
+#define CDP_CAP_B        0x04    /* Source Route Bridge */
+#define CDP_CAP_S        0x08    /* Switch */
+#define CDP_CAP_H	 0x10    /* Host */
+#define CDP_CAP_I        0x20    /* IGMP capable */
+#define CDP_CAP_R        0x40    /* Repeater */
+#define CDP_CAP_P        0x80    /* VoIP Phone */
+#define CDP_CAP_D        0x100   /* Remotely Managed Device */
+#define CDP_CAP_C        0x200   /* CVTA/STP Dispute Resolution/Cisco VT Camera */
+#define CDP_CAP_M        0x400   /* Two Port Mac Relay */
+
 
 struct cdp_header { 
 /* ethernet 802.3 header */
@@ -480,24 +485,28 @@ main(int argc, char* argv[])
 
 		case 'c':
 			didcap = 1;
-			if (strcasecmp(optarg, "l3r") == 0
-			|| strcasecmp(optarg, "router") == 0) {
-				cdp_capset |= CDP_CAP_L3R;
-			} else if (strcasecmp(optarg, "l2tb") == 0
-			|| strcasecmp(optarg, "bridge") == 0) {
-				cdp_capset |= CDP_CAP_L2TB;
-			} else if (strcasecmp(optarg, "l2srb") == 0) {
-				cdp_capset |= CDP_CAP_L2SRB;
-			} else if (strcasecmp(optarg, "l2sw") == 0
-			|| strcasecmp(optarg, "switch") == 0) {
-				cdp_capset |= CDP_CAP_L2SW;
-			} else if (strcasecmp(optarg, "l3txrx") == 0
-					|| strcasecmp(optarg, "host") == 0) {
-				cdp_capset |= CDP_CAP_L3TXRX;
-			} else if (strcasecmp(optarg, "igrp") == 0) {
-				cdp_capset |= CDP_CAP_IGRP;
-			} else if (strcasecmp(optarg, "l1") == 0) {
-				cdp_capset |= CDP_CAP_L1;
+			if (strcasecmp(optarg, "rt") == 0) {
+				cdp_capset |= CDP_CAP_RT;
+			} else if (strcasecmp(optarg, "t") == 0) {
+				cdp_capset |= CDP_CAP_T;
+			} else if (strcasecmp(optarg, "b") == 0) {
+				cdp_capset |= CDP_CAP_B;
+			} else if (strcasecmp(optarg, "s") == 0) {
+				cdp_capset |= CDP_CAP_S;
+			} else if (strcasecmp(optarg, "j") == 0) {
+				cdp_capset |= CDP_CAP_H;
+			} else if (strcasecmp(optarg, "i") == 0) {
+				cdp_capset |= CDP_CAP_I;
+			} else if (strcasecmp(optarg, "r") == 0) {
+				cdp_capset |= CDP_CAP_R;
+			} else if (strcasecmp(optarg, "p") == 0) {
+				cdp_capset |= CDP_CAP_P;
+			} else if (strcasecmp(optarg, "d") == 0) {
+				cdp_capset |= CDP_CAP_D;
+			} else if (strcasecmp(optarg, "c") == 0) {
+				cdp_capset |= CDP_CAP_C;
+			} else if (strcasecmp(optarg, "m") == 0) {
+				cdp_capset |= CDP_CAP_M;
 			} else {
 				i = strtod(optarg, &q);
 				if (!q || !*q) {
@@ -507,13 +516,17 @@ main(int argc, char* argv[])
 				if (strcasecmp(optarg, "list"))
 					fprintf(stderr, "Unknown capability string: %s\n\n", optarg);
 				fprintf(stderr, "Known capabilities:\n"
-"  l3r        layer-3 router\n"
-"  l2tb       layer-2 transparent bridge\n"
-"  l2srb      layer-2 source-route bridge\n"
-"  l2sw       layer-2 switch (not spanning tree)\n"
-"  l3txrx     layer-3 host\n"
-"  igrp       does not forward IGMP to non-routers\n"
-"  l1         layer-1 repeater\n");
+"  rt        Router\n"
+"  t         Transparent Bridge\n"
+"  b         Source Route Bridge\n"
+"  s         Switch\n"
+"  h         Host\n"
+"  i         IGMP capable\n"
+"  r         Repeater\n"
+"  p         VoIP Phone\n"
+"  d         Remotely Managed Device\n"
+"  c         CVTA/STP Dispute Resolution/Cisco VT Camera\n"
+"  m         Two Port Mac Relay\n");
 				exit(1);
 			}
 			break;
